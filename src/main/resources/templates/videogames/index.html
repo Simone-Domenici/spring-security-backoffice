@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8">
+    <title>Home - Videogame Backoffice</title>
+    <!-- Include Bootstrap-->
+    <div th:insert="~{fragments/fragments :: bootstrap-webjars}"></div>
+  </head>
+  <body>
+    <!-- Navbar -->
+    <nav th:replace="~{fragments/fragments :: navbar}"></nav>
+
+    <div class="container mt-4">
+      <h1 class="mb-3">Videogames</h1>
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Developed By</th>
+            <th>Published By</th>
+            <th>Release Date</th>
+            <th>Metacritic Score</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr th:each="vg : ${videogames}">
+            <td th:text="${vg.name}"></td>
+            <td th:text="${vg.developedBy}"></td>
+            <td th:text="${vg.publishedBy}"></td>
+            <td th:text="${vg.releaseDate}"></td>
+            <td th:text="${vg.metacriticScore}"></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Footer -->
+    <footer th:replace="~{fragments/fragments :: footer}"></footer>
+
+    <!-- Include Bootstrap JS -->
+    <div th:insert="~{fragments/fragments :: bootstrap-cdn}"></div>
+  </body>
+</html>
