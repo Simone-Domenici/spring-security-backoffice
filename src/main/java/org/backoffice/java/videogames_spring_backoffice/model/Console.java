@@ -2,6 +2,9 @@ package org.backoffice.java.videogames_spring_backoffice.model;
 
 import java.util.Set;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -13,6 +16,10 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "console")
+@JsonIdentityInfo(
+  generator = ObjectIdGenerators.PropertyGenerator.class,
+  property = "id"
+)
 public class Console {
 
     @Id

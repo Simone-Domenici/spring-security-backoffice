@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8">
+    <title>Home - Videogame Backoffice</title>
+    <!-- Include Bootstrap via CDN -->
+     
+    <div th:insert="~{fragments/fragments :: bootstrap-cdn}"></div>
+  </head>
+  <body>
+    <!-- Navbar -->
+    <th:replace template="~{fragments/fragments :: navbar}" />
+
+    <div class="container mt-5 text-center">
+      <h1>Welcome to the Videogame Backoffice</h1>
+      <p class="lead mt-4">Choose a section to manage:</p>
+      <div class="list-group mt-5">
+        <a th:href="@{/videogames}" class="list-group-item list-group-item-action">Manage Videogames</a>
+        <a th:href="@{/consoles}" class="list-group-item list-group-item-action">Manage Consoles</a>
+        <a th:href="@{/genres}" class="list-group-item list-group-item-action">Manage Genres</a>
+      </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <div th:insert="~{fragments/fragments :: bootstrap-cdn}"></div>
+    <!-- Footer -->
+    <div th:replace="~{fragments/fragments :: footer}"></div>
+  </body>
+</html>

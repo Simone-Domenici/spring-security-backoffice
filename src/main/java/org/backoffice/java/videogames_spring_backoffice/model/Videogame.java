@@ -14,8 +14,15 @@ import jakarta.persistence.Table;
 import java.time.LocalDate;
 import java.util.Set;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 @Entity
 @Table(name = "videogame")
+@JsonIdentityInfo(
+  generator = ObjectIdGenerators.PropertyGenerator.class,
+  property = "id"
+)
 public class Videogame {
 
     @Id
@@ -25,16 +32,16 @@ public class Videogame {
     @Column(nullable = false, length = 150)
     private String name;
 
-    @Column(name = "developed_by", length = 100)
+    @Column(nullable = false, name = "developed_by", length = 100)
     private String developedBy;
 
-    @Column(name = "published_by", length = 100)
+    @Column(nullable = false, name = "published_by", length = 100)
     private String publishedBy;
 
-    @Column(name = "release_date")
+    @Column(nullable = false, name = "release_date")
     private LocalDate releaseDate;
 
-    @Column(name = "metacritic_score")
+    @Column(nullable = false, name = "metacritic_score")
     private Double metacriticScore;
 
     @ManyToMany(fetch = FetchType.LAZY)
