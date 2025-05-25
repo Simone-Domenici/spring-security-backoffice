@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8">
+    <title>Genres</title>
+    <div th:insert="~{fragments/fragments :: bootstrap-cdn}"></div>
+  </head>
+  <body>
+    <nav th:replace="~{fragments/fragments :: navbar}"></nav>
+    <div class="container mt-4">
+      <h1 class="mb-3">Genres</h1>
+      <a th:href="@{/genres/create}" class="btn btn-primary mb-3">Create Genre</a>
+      <table class="table table-striped">
+        <thead class="container-fluid">
+          <tr class="table-dark">
+            <th>Name</th>
+            <th class="text-center">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr th:each="genre : ${genres}">
+            <td th:text="${genre.name}"></td>
+            <td class="text-center">
+              <a th:href="@{'/genres/edit/' + ${genre.id}}" class="btn btn-sm btn-warning">Edit</a>
+              <form th:action="@{'/genres/delete/' + ${genre.id}}" method="post" th:object="${genre}" style="display:inline">
+                <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+              </form>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div th:insert="~{fragments/fragments :: footer}"></div>
+    <div th:insert="~{fragments/fragments :: bootstrap-cdn}"></div>
+
+  </body>
+</html>

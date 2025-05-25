@@ -23,6 +23,15 @@ public class VideogameController {
         return "videogames/index";
     }
 
+    @GetMapping("/{id}")
+    public String show(@PathVariable Long id, Model model) {
+        // recupera il singolo videogame e lo mette in "videogame"
+        Videogame vg = service.findById(id)
+            .orElseThrow(() -> new RuntimeException("Videogame not found: " + id));
+        model.addAttribute("videogame", vg);
+        return "videogames/show";
+    }
+
     @GetMapping("/create")
     public String createForm(Model model) {
         model.addAttribute("videogame", new Videogame());

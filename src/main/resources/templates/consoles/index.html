@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8">
+    <title>Consoles</title>
+    <div th:insert="~{fragments/fragments :: bootstrap-cdn}"></div>
+  </head>
+  <body>
+    <nav th:replace="~{fragments/fragments :: navbar}"></nav>
+    <div class="container mt-4">
+      <h1 class="mb-3">Consoles</h1>
+      <a th:href="@{/consoles/create}" class="btn btn-primary mb-3">Create Console</a>
+      <table class="table table-striped">
+        <thead class="container-fluid">
+          <tr class="table-dark">
+            <th>Name</th>
+            <th class="text-center">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr th:each="console : ${consoles}">
+            <td th:text="${console.name}"></td>
+            <td class="text-center">
+              <a th:href="@{'/consoles/edit/' + ${console.id}}" class="btn btn-sm btn-warning">Edit</a>
+              <form th:action="@{'/consoles/delete/' + ${console.id}}" method="post" style="display:inline">
+                <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+              </form>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div th:insert="~{fragments/fragments :: footer}"></div>
+    <div th:insert="~{fragments/fragments :: bootstrap-cdn}"></div>
+
+  </body>
+</html>
