@@ -57,7 +57,7 @@ public class VideogameController {
     public String store(@Valid @ModelAttribute("videogame") Videogame formVideogame, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()){
             model.addAttribute("consoles", consoleService.findAll());
-            model.addAttribute("genre", genreService.findAll());
+            model.addAttribute("genres", genreService.findAll());
             return "videogames/form";
         }
 

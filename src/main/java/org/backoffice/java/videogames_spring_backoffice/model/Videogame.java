@@ -10,6 +10,10 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.DecimalMax;
+import jakarta.validation.constraints.DecimalMin;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 import java.time.LocalDate;
 import java.util.Set;
@@ -30,18 +34,25 @@ public class Videogame {
     private Long id;
 
     @Column(nullable = false, length = 150)
+    @NotBlank(message = "The name cannot be blank, empty or null")
     private String name;
 
     @Column(nullable = false, name = "developed_by", length = 100)
+    @NotBlank(message = "The Developer's name cannot be blank, empty or null")
     private String developedBy;
 
     @Column(nullable = false, name = "published_by", length = 100)
+    @NotBlank(message = "The Publisher's name cannot be blank, empty or null")
     private String publishedBy;
 
     @Column(nullable = false, name = "release_date")
+    @NotNull(message = "The release date cannot be null")
     private LocalDate releaseDate;
 
     @Column(nullable = false, name = "metacritic_score")
+    @NotNull(message = "The score cannot be null")
+    @DecimalMin(value = "0.0", inclusive = true, message = "The score cannot be less than 0")
+    @DecimalMax(value = "100.0", inclusive = true, message = "The score cannot exceed 100")
     private Double metacriticScore;
 
     @ManyToMany(fetch = FetchType.EAGER)
