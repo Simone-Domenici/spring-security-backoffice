@@ -68,7 +68,16 @@ public class ConsoleController {
 
     @PostMapping("/delete/{id}")
     public String delete(@PathVariable Long id) {
-        service.findById(id).ifPresent(service::delete);
+       Console consoleToDelete = service.findById(id).get();
+       
+        if (consoleToDelete.getVideogames() != null) {
+            consoleToDelete.getVideogames().forEach(videogame ->{
+                videogame.getConsoles().remove(consoleToDelete);
+            });
+        }
+
+        service.delete(consoleToDelete);
+
         return "redirect:/consoles";
     }
 }

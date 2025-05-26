@@ -64,7 +64,16 @@ public class GenreController {
 
     @PostMapping("/delete/{id}")
     public String delete(@PathVariable Long id) {
-        service.findById(id).ifPresent(service::delete);
+        Genre genreToDelete = service.findById(id).get();
+
+        if (genreToDelete.getVideogames() != null) {
+            genreToDelete.getVideogames().forEach(videogame -> {
+                videogame.getGenres().remove(genreToDelete);
+            });
+        }
+
+        service.delete(genreToDelete);
+        
         return "redirect:/genres";
     }
 }

@@ -15,7 +15,7 @@
   <div class="container mt-4">
     <div class="d-flex justify-content-between align-items-center mb-3">
       <h1 class="mb-3">Videogames</h1>
-      <a th:href="@{/videogames/create}" class="btn btn-primary mb-3">Create New Videogame</a>
+      <a sec:authorize="hasAuthority('ADMIN')" th:href="@{/videogames/create}" class="btn btn-primary mb-3">Create New Videogame</a>
     </div>
     <table class="table table-striped table-bordered table-hover">
       <thead>
@@ -37,8 +37,8 @@
           <td th:text="${vg.metacriticScore}"></td>
           <td class="text-center">
             <a th:href="@{'/videogames/' + ${vg.id}}" class="btn btn-sm btn-info">View</a>
-            <a th:href="@{'/videogames/edit/' + ${vg.id}}" class="btn btn-sm btn-warning">Edit</a>
-            <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal"
+            <a sec:authorize="hasAuthority('ADMIN')" th:href="@{'/videogames/edit/' + ${vg.id}}" class="btn btn-sm btn-warning">Edit</a>
+            <button sec:authorize="hasAuthority('ADMIN')" type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal"
               th:data-bs-target="|#delete-modal-${vg.id}|">
               Delete
             </button>

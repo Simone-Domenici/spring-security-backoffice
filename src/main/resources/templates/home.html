@@ -16,8 +16,8 @@
       <p class="lead mt-4">Choose a section to manage:</p>
       <div class="list-group mt-5">
         <a th:href="@{/videogames}" class="list-group-item list-group-item-action">Manage Videogames</a>
-        <a th:href="@{/consoles}" class="list-group-item list-group-item-action">Manage Consoles</a>
-        <a th:href="@{/genres}" class="list-group-item list-group-item-action">Manage Genres</a>
+        <a sec:authorize="hasAuthority('ADMIN')" th:href="@{/consoles}" class="list-group-item list-group-item-action">Manage Consoles</a>
+        <a sec:authorize="hasAuthority('ADMIN')" th:href="@{/genres}" class="list-group-item list-group-item-action">Manage Genres</a>
       </div>
     </div>
 
