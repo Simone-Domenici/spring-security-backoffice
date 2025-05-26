@@ -1,51 +1,79 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-  <head>
-    <meta charset="UTF-8">
-    <title>Videogame</title>
-    <!-- Include Bootstrap-->
-    <div th:insert="~{fragments/fragments :: bootstrap-webjars}"></div>
-  </head>
-  <body>
-    <!-- Navbar -->
-    <nav th:replace="~{fragments/fragments :: navbar}"></nav>
 
-    <div class="container mt-4">
+<head>
+  <meta charset="UTF-8">
+  <title>Videogame</title>
+  <!-- Include Bootstrap-->
+  <div th:insert="~{fragments/fragments :: bootstrap-webjars}"></div>
+</head>
+
+<body>
+  <!-- Navbar -->
+  <nav th:replace="~{fragments/fragments :: navbar}"></nav>
+
+  <div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-3">
       <h1 class="mb-3">Videogames</h1>
-      <table class="table table-striped table-bordered table-hover">
-        <thead>
-          <tr class="table-dark">
-            <th>Name</th>
-            <th>Developed By</th>
-            <th>Published By</th>
-            <th>Release Date</th>
-            <th>Metacritic Score</th>
-            <th class="text-center">Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr th:each="vg : ${videogames}">
-            <td th:text="${vg.name}"></td>
-            <td th:text="${vg.developedBy}"></td>
-            <td th:text="${vg.publishedBy}"></td>
-            <td th:text="${vg.releaseDate}"></td>
-            <td th:text="${vg.metacriticScore}"></td>
-            <td class="text-center">
-              <a th:href="@{'/videogames/' + ${vg.id}}" class="btn btn-sm btn-info">View</a>
-              <a th:href="@{'/videogames/edit/' + ${vg.id}}" class="btn btn-sm btn-warning">Edit</a>
-              <form th:action="@{'/videogames/delete/' + ${vg.id}}" method="post" style="display:inline">
-                <button type="submit" class="btn btn-sm btn-danger">Delete</button>
-              </form>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+      <a th:href="@{/videogames/create}" class="btn btn-primary mb-3">Create New Videogame</a>
     </div>
+    <table class="table table-striped table-bordered table-hover">
+      <thead>
+        <tr class="table-dark">
+          <th>Name</th>
+          <th>Developed By</th>
+          <th>Published By</th>
+          <th>Release Date</th>
+          <th>Metacritic Score</th>
+          <th class="text-center">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr th:each="vg : ${videogames}">
+          <td th:text="${vg.name}"></td>
+          <td th:text="${vg.developedBy}"></td>
+          <td th:text="${vg.publishedBy}"></td>
+          <td th:text="${vg.releaseDate}"></td>
+          <td th:text="${vg.metacriticScore}"></td>
+          <td class="text-center">
+            <a th:href="@{'/videogames/' + ${vg.id}}" class="btn btn-sm btn-info">View</a>
+            <a th:href="@{'/videogames/edit/' + ${vg.id}}" class="btn btn-sm btn-warning">Edit</a>
+            <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal"
+              th:data-bs-target="|#delete-modal-${vg.id}|">
+              Delete
+            </button>
+            <div class="modal fade" th:id="|delete-modal-${vg.id}|" tabindex="-1" aria-labelledby="delete-modal"
+              aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="delete-modal">Delete [[${vg.name}]]</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body">
+                    <p>Are you sure you want to delete this videogame?</p>
+                    <p><strong>Name:</strong> <span th:text="${vg.name}"></span></p>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <form method="post" th:action="@{/videogames/delete/{id}(id=${vg.id})}">
+                      <button type="submit" class="btn btn-danger">Delete</button>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 
-    <!-- Footer -->
-    <footer th:replace="~{fragments/fragments :: footer}"></footer>
+  <!-- Footer -->
+  <footer th:replace="~{fragments/fragments :: footer}"></footer>
 
-    <!-- Include Bootstrap JS -->
-    <div th:insert="~{fragments/fragments :: bootstrap-cdn}"></div>
-  </body>
+  <!-- Include Bootstrap JS -->
+  <div th:insert="~{fragments/fragments :: bootstrap-cdn}"></div>
+</body>
+
 </html>

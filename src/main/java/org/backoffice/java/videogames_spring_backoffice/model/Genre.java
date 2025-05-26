@@ -13,6 +13,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.Size;
 
 @Entity
 @Table(name = "genre")
@@ -27,6 +28,7 @@ public class Genre {
     private Long id;
     
     @Column(nullable = false, unique = true, length = 50)
+    @Size(min = 3, message = "The name must be at least 3 chars")
     private String name;
     
     @ManyToMany(mappedBy = "genres", fetch = FetchType.EAGER)

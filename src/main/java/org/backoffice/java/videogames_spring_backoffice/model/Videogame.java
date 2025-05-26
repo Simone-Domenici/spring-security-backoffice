@@ -44,7 +44,7 @@ public class Videogame {
     @Column(nullable = false, name = "metacritic_score")
     private Double metacriticScore;
 
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
         name = "videogame_console",
         joinColumns = @JoinColumn (name = "videogame_id"),
@@ -52,7 +52,7 @@ public class Videogame {
         )
     private Set<Console> consoles;
 
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
         name = "videogame_genre",
         joinColumns = @JoinColumn(name = "videogame_id"),

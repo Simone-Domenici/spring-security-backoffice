@@ -13,6 +13,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.Size;
 
 @Entity
 @Table(name = "console")
@@ -27,9 +28,10 @@ public class Console {
     private Long id;
 
     @Column(nullable = false, unique = true, length = 50)
+    @Size(min = 2, message = "The name must be at least 2 chars")
     private String name;
 
-    @ManyToMany(mappedBy = "consoles", fetch = FetchType.LAZY)
+    @ManyToMany(mappedBy = "consoles", fetch = FetchType.EAGER)
     private Set<Videogame> videogames;
     
     // getters and setters
