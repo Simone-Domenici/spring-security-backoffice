@@ -2,8 +2,7 @@ package org.backoffice.java.videogames_spring_backoffice.model;
 
 import java.util.Set;
 
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -17,10 +16,6 @@ import jakarta.validation.constraints.Size;
 
 @Entity
 @Table(name = "genre")
-@JsonIdentityInfo(
-  generator = ObjectIdGenerators.PropertyGenerator.class,
-  property = "id"
-)
 public class Genre {
     
     @Id
@@ -32,6 +27,7 @@ public class Genre {
     private String name;
     
     @ManyToMany(mappedBy = "genres", fetch = FetchType.EAGER)
+    @JsonIgnore
     private Set<Videogame> videogames;
     
     // getters and setters

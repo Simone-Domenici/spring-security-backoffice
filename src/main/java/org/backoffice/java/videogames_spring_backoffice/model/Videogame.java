@@ -18,15 +18,9 @@ import jakarta.validation.constraints.NotNull;
 import java.time.LocalDate;
 import java.util.Set;
 
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 @Entity
 @Table(name = "videogame")
-@JsonIdentityInfo(
-  generator = ObjectIdGenerators.PropertyGenerator.class,
-  property = "id"
-)
 public class Videogame {
 
     @Id

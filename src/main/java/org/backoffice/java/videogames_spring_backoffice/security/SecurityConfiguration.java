@@ -17,7 +17,12 @@ public class SecurityConfiguration {
     @Bean
     @SuppressWarnings("removal")
     SecurityFilterChain filterChain(HttpSecurity http) throws Exception{
+        http.httpBasic();
+        http.csrf(csrf -> csrf.disable());
         http.authorizeHttpRequests()
+                .requestMatchers(HttpMethod.POST,"/api/**").hasAuthority("ADMIN")
+                .requestMatchers(HttpMethod.PUT,"/api/**").hasAuthority("ADMIN")
+                .requestMatchers(HttpMethod.DELETE,"/api/**").hasAuthority("ADMIN")
                 .requestMatchers("/videogames/create", "/videogames/edit/**").hasAuthority("ADMIN")
                 .requestMatchers(HttpMethod.POST, "/videogames/**").hasAuthority("ADMIN")
                 .requestMatchers("/consoles", "/consoles/**").hasAuthority("ADMIN")
