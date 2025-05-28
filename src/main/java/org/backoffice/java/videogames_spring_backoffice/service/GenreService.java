@@ -30,6 +30,10 @@ public class GenreService {
         genreRepo.delete(genre);
     }
 
+    public void deleteById(Long id){
+        genreRepo.deleteById(id);
+    }
+
     public boolean existsById(Long id) {
         return genreRepo.existsById(id);
     }

@@ -30,6 +30,10 @@ public class ConsoleService {
         consoleRepo.delete(console);
     }
 
+    public void deleteById(Long id){
+        consoleRepo.deleteById(id);
+    }
+
     public boolean existsById(Long id) {
         return consoleRepo.existsById(id);
     }

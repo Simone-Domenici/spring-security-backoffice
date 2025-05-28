@@ -3,6 +3,8 @@ package org.backoffice.java.videogames_spring_backoffice.service;
 import java.util.List;
 import java.util.Optional;
 
+import org.backoffice.java.videogames_spring_backoffice.model.Console;
+import org.backoffice.java.videogames_spring_backoffice.model.Genre;
 import org.backoffice.java.videogames_spring_backoffice.model.Videogame;
 import org.backoffice.java.videogames_spring_backoffice.repository.VideogameRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,5 +43,13 @@ public class VideogameService {
 
     public boolean existsById(Long id) {
         return videogameRepo.existsById(id);
+    }
+
+    public List<Videogame> findByConsole(Console console){
+        return videogameRepo.findAllByConsolesContains(console);
+    }
+
+    public List<Videogame> findByGenre(Genre genre){
+        return videogameRepo.findAllByGenresContains(genre);
     }
 }
